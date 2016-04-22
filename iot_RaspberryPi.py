@@ -36,7 +36,7 @@ mqttc.tls_set("/home/pi/root-CA.crt",
               ciphers=None)
 
 #connecting to aws-account-specific-iot-endpoint
-mqttc.connect("A39JJ2EUJJ2O4W.iot.eu-west-1.amazonaws.com", port=8883) #AWS IoT service hostname and portno
+mqttc.connect("https://A39JJ2EUJJ2O4W.iot.eu-west-1.amazonaws.com/things/RaspberryPi/shadow", port=8883) #AWS IoT service hostname and portno
 
 #the topic to publish to
 mqttc.subscribe("$aws/things/RaspberryPi/shadow/update", qos=1) #The names of these topics start with $aws/things/thingName/shadow."
