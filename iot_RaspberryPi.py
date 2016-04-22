@@ -3,6 +3,7 @@
 #required libraries
 import sys                                 
 import ssl
+import json
 import paho.mqtt.client as mqtt
 
 #called while client tries to establish connection with the server
@@ -40,6 +41,17 @@ mqttc.connect("https://A39JJ2EUJJ2O4W.iot.eu-west-1.amazonaws.com/things/Raspber
 
 #the topic to publish to
 mqttc.subscribe("$aws/things/RaspberryPi/shadow/update", qos=1) #The names of these topics start with $aws/things/thingName/shadow."
+
+#Send some dummy data
+thing = "RaspberryPi"
+payload = json.dumps({
+    "state": {
+        "reported": {
+            "this_thing_is_alive": true
+        }
+    }
+})
+mqttc.publish("$aws/things/" + thing +"/shadow/update", payload)
 
 #automatically handles reconnecting
 mqttc.loop_forever()
